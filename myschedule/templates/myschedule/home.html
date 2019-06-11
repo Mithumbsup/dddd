@@ -1,0 +1,21 @@
+{% extends "myschedule/base.html" %}
+
+{% block content %}
+    {% if user.is_active %}
+    <p>{{ user.username }}님 반갑습니다.</p>
+
+    <p><a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a> 
+    <a href="{% url 'account:signup' %}">signup</a>
+    {% endif %}
+
+    
+    {% for post in posts.all %}
+        <div>
+            <p>{{post.schedule_date}}</p>
+            <h3><a href = "{% url 'detail' post.id %}">{{post.title}}</a></h3>
+        </div>
+    {% endfor %}
+{% endblock %}
